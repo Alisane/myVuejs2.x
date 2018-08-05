@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let-const</title>
+</head>
+<body>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+
+<script>
+    //let 和 const声明变量常量 与 var 声明  ES6中{}表示作用域块
+    //01-作用域值局限于当前代码快
+    /*{
+        var str1="str1";
+        let str2="str2";
+        console.log(str1);//str1
+        console.log(str2);//str2
+    }
+    console.log(str1);//str1
+    console.log(str2);//ReferenceError: str2 is not defined*/
+    //02-使用let声明的变量作用域不会提升
+    /*{
+        console.log(str1);//undefined声明了未定义
+        var str1="str1";
+        console.log(str1);//str1
+        console.log(str2);//ReferenceError: can't access lexical declaration `str2' before initialization在解释时就报错了
+        let str2="str2";
+        console.log(str2);//str2
+    }*/
+    //03-在相同的作用域下不能声明相同的变量
+    /*{
+        var str1="str1";
+        var str1="str11";
+        console.log(str1);//str11覆盖了第一个
+        let str2="str2";
+        let str2="str22";
+        console.log(str2);//SyntaxError: redeclaration of let str2 01-let-const.html:35:12 note: Previously declared at line 34, column 12
+    }*/
+    //04-for循环体现let的父子作用域
+    var btns=document.querySelectorAll("button");
+    /*for(var i=0;i<btns.length;i++) {//for循环是同步的
+        console.log(i);//0 1 2
+        btns[i].onclick=function () {//事件的触发是异步的
+            console.log(i);// 2 2 2   其中的i是在for循环中找到的
+        };*/
+    for(let i=0;i<btns.length;i++) {//
+        console.log(i);//0 1 2
+        btns[i].onclick=function () {
+            console.log(i);// 0 1 2
+        };
+    }
+    //const 具有上述01 02 03的特点  以及他说声明的是常量 如java中的static
+    const str1="str1";
+    console.log(str1);
+   // str1='s';//TypeError: invalid assignment to const `str1'
+</script>
+
+</body>
+</html>

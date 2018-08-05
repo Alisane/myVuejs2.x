@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-数据集合-map</title>
+</head>
+<body>
+<script>
+    //1.创建一个map  map也适合去重
+    let obj1={a:1},obj2={b:2};
+    const map=new Map([
+        ['name','zhangsan'],
+        ['age',18],
+        ['sex','男'],
+        [obj1,'今天天气好哦'],
+        [obj2,'适合敲代码'],
+        [[1,2],'hello world']
+    ]);
+    console.log(map);
+    console.log(map.size);//6
+    //1.set()  get()
+    map.set('friends',['zhaoliu','liqi']).set('dogs',['baba','lulu']);
+    console.log(map);
+    map.get('sex');
+    console.log(map.get('sex'));
+    //2.delete()
+    map.delete(obj1);
+    console.log(map);
+    //3.has()
+    console.log(map.has(obj1));
+    console.log(map.has(obj2));
+    //4.clear()
+    //map.clear(map);
+    //5.keys() values()  entries()  //Map Iterator {  }均返回构造器
+    console.log(map.keys());
+    console.log(map.values());
+    console.log(map.entries());
+    //6.遍历
+    map.forEach(function (value,index) {
+        console.log(value);
+        console.log(index);
+    })
+    //注意事项
+    map.set({},'aaaaa');
+    map.set({},'bbbbb');
+    console.log(map);
+    console.log({}==={});//false  对象是复杂的数据类型，放在堆中
+
+
+</script>
+</body>
+</html>

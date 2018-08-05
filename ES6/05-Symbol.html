@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symbol</title>
+</head>
+<body>
+<script>
+    //ES5的对象属性名都是字符串，容易造成属性名冲突
+    //ES6引入新的原始数据类型Symbol表示独一无二的值，不会与其他属性名产生冲突
+    //1.定义
+    let str1=Symbol();
+    let str2=Symbol();
+    console.log(typeof(str1));//symbol
+    //2.描述
+    let str3=Symbol('name');
+    let str4=Symbol('name');
+    console.log(str3);//Symbol(name)
+    console.log(str3===str4);//false
+    //3.最常用在对象的属性名中
+    const obj={};
+    /*obj.name="zhangsan";
+    obj.name="lisi";*/
+    obj[Symbol('name')]='zhangsan';
+    obj[Symbol('name')]='lisi';
+    console.log(obj);
+
+
+</script>
+</body>
+</html>
