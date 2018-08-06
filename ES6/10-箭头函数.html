@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-箭头函数</title>
+</head>
+<body>
+<script>
+    //1.箭头函数
+    //()=>{}
+    //function ()={}
+    let sum =(num1,num2)=>{return num1=num2;}
+    console.log(sum(10, 20));
+    let arr=[1,2,3,6,4];
+    arr.forEach((index,value)=>{//遍历数组
+        console.log(index + ":" + value);
+    })
+    //箭头函数用来解决this的指向问题
+    function demo() {
+        setTimeout(function () {
+            console.log(this);//Window
+        },1000);
+        setTimeout(()=> {
+            console.log(this);//Object
+        },1000);
+    }
+    let obj={};
+    demo.call(obj);//obj调用demo
+</script>
+</body>
+</html>

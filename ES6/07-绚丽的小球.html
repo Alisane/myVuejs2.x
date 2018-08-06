@@ -2,9 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>07-绚丽的小球</title>
+    <script src="./js/underscore-min.js"></script>
 </head>
 <body>
+    <canvas id="canvas">当前历览器不支持此版本</canvas>
+
+    <script>
+        //1.获取当前的画布
+        const canvas=document.getElementById("canvas");
+        const ctx=canvas.getContext('2d');
+        canvas.width=1000;
+        canvas.height=1000;
+        canvas.style.backgroundColor="#000";
+        //2.小球类
+        class Boll{
+            constructor(x,y,color){
+                this.x=x;
+                this.y=y;
+                this.color=color;
+                this.r=40;
+            }
+            /*绘制小球*/
+            render(){
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+                ctx.fillStyle=this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        /*3.会移动的小球类*/
+        class MoveBoll extends Boll{
+            constructor(x,y,color){
+                super(x,y,color);//将父类构造器的参数传递来
+
+                //量的变化
+                this.dx=_.random(-5,5);
+                this.dy=_.random(-5,5);
+                this.dr=_.random(1,3);
+            }
+            upDate(){
+                this.x+=this.dx;
+                this.y+=this.dy;
+                this.r-=this.dr;
+                if(this.r<0){
+                    this.r=0;
+                }
+            }
+        }
+       //4.实例化小球
+        let bollArr=[];
+        let colorArr=['#99CC33','#FF9900','FFCC00','#FFFF00','#66CC99','#CCCC00','#FFFFCC'];
+        //5.监听鼠标的移动
+        canvas.addEventListener('mousemove',function (e) {
+            bollArr.push(new MoveBoll(e.offsetX,e.offsetY,colorArr[_.random(0,colorArr.length-1)]));//将绘制的小球放到小球数组中
+        });
+
+        //6.开启定时器
+        setInterval(function () {
+            //清屏
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            //绘制
+            for(let i=0;i<bollArr.length;i++){
+            bollArr[i].render();
+            bollArr[i].upDate();
+            }
+        },50);
+
+    </script>
 
 </body>
 </html>

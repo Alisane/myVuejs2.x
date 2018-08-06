@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-数据集合-set</title>
+</head>
+<body>
+<script>
+    //set中没有重复数据   一个属性  四个方法
+
+    //1.创建一个集合
+    let set = new Set(['zs','ls','zs','ww']);
+    console.log(set);
+    //2.一个属性  size
+    console.log(set.size);
+    //3.四个方法
+    //add()
+    console.log(set.add('刘德华').add('王菲'));//返回set
+    //delete()
+    console.log(set.delete('王菲'));//true
+    //has()
+    console.log(set.has('zs'));//true
+    //clear()//无返回值
+
+
+
+</script>
+</body>
+</html>

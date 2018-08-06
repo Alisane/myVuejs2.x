@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08-内置对象的拓展</title>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+
+
+</ul>
+<script>
+    //1.模板字符串    在文本中拥有一些格式
+   /* //let html='<html><head></head><body><p>今天天气好</p><div>适合敲代码</div></body></html>';
+    let str="适合敲代码";
+    let html= ~<html>
+                <head></head>
+                    <body>
+                        <p>今天天气好</p>
+                        <div>${str}</div>
+                    </body>
+                </html>~;
+    console.log(html);*/
+
+    //2.数组的扩展
+    /*//Array.form  将其他集合转化为数组
+    let lis=document.querySelectorAll("li");
+    console.log(lis);//NodeList  是一个伪数组
+    console.log(Array.isArray(lis));//false
+    console.log(Array.from(lis));//Array
+    //Array.of  将零散的数据转化为数组
+    console.log(Array.of(1, 2, 3));//Array[1,2,3]*/
+
+    //3.对象的扩展
+    //Object.assign()  合并对象
+    let obj1={name:'zs'};
+    let obj2={age:16};
+    let obj3={sex:'男'};
+    let obj={};
+    console.log(Object.assign(obj, obj1, obj2, obj3));
+    //延展操作符  用于数据的传递   用于去重
+    let str='我是中国人';
+    let strArray=[...str];//将str转化为数组
+    console.log(strArray);//Array(5) [ "我", "是", "中", "国", "人" ]
+    //去重
+    let str1=[1,3,6,'zs',1,3];
+    console.log(new Set(str1));//Set(4) [ 1, 3, 6, "zs" ]
+    console.log([...new Set(str1)]);//Array(4) [ 1, 3, 6, "zs" ]
+
+
+
+</script>
+</body>
+</html>
