@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-Vue指令</title>
+    <style>
+        table{
+            border: 1px solid yellowgreen;
+            width: 600px;
+            margin: auto;
+        }
+        thead{
+            background: darkorange;
+        }
+        .active{
+            background: darkorange;
+            font-size: 20px;
+        }
+        .active:hover{
+            background: greenyellow;
+        }
+        fieldset{
+            width: 600px;
+            margin: auto;
+        }
+        fieldset input{
+            width: 200px;
+            height: 30px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <P v-once>原始值：{{msg}}</P>
+    <P>后面值：{{msg}}</P>
+    <input type="text" v-model="msg"/>
+    <P v-if="show">要显示：{{msg}}</P>
+    <P v-if="hidden">不要显示：{{msg}}</P>
+
+    <P v-if="height>1.88">身高：{{height}}</P>
+    <P v-else>身高：小于1.88</P>
+
+    <P v-show="age<15">年龄：{{age}}</P><p>--------------------------------------------</p>
+
+    <p>您的成绩等级是：</p>
+    <input type="text" v-model="score" />
+    <P v-if="score>90">优秀</P>
+    <P v-else-if="score>75">良好</P>
+    <P v-else-if="score>60">及格</P>
+    <P v-else>不及格</P><p>--------------------------------------------</p>
+
+    <p>alisane的朋友和狗狗</p>
+    <p v-for="(friend,index) in friends">{{friend}}</p><!--遍历数组-->
+    <p v-for="mydog in dog">{{mydog}}</p><!--遍历对象-->
+    <p v-for="str in name">{{str}}</p><!--遍历string-->
+    <!--<p v-for="ph in phone">{{ph}}</p>&lt;!&ndash;遍历number&ndash;&gt;--><p>--------------------------------------------</p>
+
+    <table>
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in stu">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.sex}}</td>
+            </tr>
+        </tbody>
+    </table><p>--------------------------------------------</p>
+
+    <p>{{name}}</p>
+    <p v-text="name">小明</p>
+    <div v-html="html">
+        haha
+    </div><p>--------------------------------------------</p>
+
+    <img v-bind:src="imgSrc" :alt="alt" /><p>--------------------------------------------</p>
+
+    <div>
+        <p v-for="(course,index) in courses" :class="index===activeIndex?'active':''">{{course}}</p>
+    </div><p>--------------------------------------------</p>
+
+    <button v-on:click="weather='下雨了'">点击改变</button>
+    <p>{{weather}}</p>
+    <button @click="changeContent()">点击改变</button><p>--------------------------------------------</p>
+
+    <fieldset>
+        <legend>学生成绩录入</legend>
+        <div>
+            <span>姓名：</span>
+            <input type="text" placeholder="请输入姓名" v-model="newPerson.name" />
+        </div>
+        <div>
+            <span>年龄：</span>
+            <input type="text" placeholder="请输入年龄" v-model="newPerson.age" />
+        </div>
+        <div>
+            <span>性别：</span>
+            <select v-model="newPerson.sex">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div>
+            <span>手机号：</span>
+            <input type="text" placeholder="请输入手机号" v-model="newPerson.phone" />
+        </div>
+        <button @click="createPerson()">创建新用户</button>
+    </fieldset>
+    <table>
+        <thead>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>手机号</td>
+            <td>删除</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) in persons">
+            <td >{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.sex}}</td>
+            <td>{{item.phone}}</td>
+            <td><button @click="deletePerson(index)">删除</button></td>
+        </tr>
+        </tbody>
+    </table><p>--------------------------------------------</p>
+
+
+
+</div>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+    /*
+    v-model:实现数据的双向绑定
+    v-once: 记录第一次的值，不随改变而改变
+    v-if: 条件渲染指令 v-if="expression"expression返回的是bool值   dom树改变<！---->
+    v-else: 与v-if配套使用  必须紧跟在v-if后面
+    v-show: 条件渲染指令  v-show="expression"expression返回的是bool值  css样式的切换 display:none
+    v-else-if:条件渲染指令 多条件指令
+    v-for:基于数据渲染一个列表，类似js中的遍历，其数据类型可以是Array,object,number,string,优先级高于其他指令
+    v-text:注入的数据将静态数据覆盖
+    v-html:注入标签
+    v-bind:将属性动态的绑定到标签上面去  可以绑定属性  绑定类   简写 :
+    v-on: 用于触发事件  @
+
+    */
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+            show:true,
+            hidden:false,
+            height:1.66,
+            age:18,
+            score:90,
+            friends:['小明','小华','小兰'],
+            dog:{name:'笨笨狗',age:5},
+            name:'ali',
+//          phone:456123
+            stu:[
+                {name:'张三',age:23,sex:'男'},
+                {name:'李四',age:15,sex:'男'},
+                {name:'王五',age:28,sex:'女'}
+                ],
+            html:'<input type="color" />',
+            imgSrc:'images/img1.jpg',
+            alt:'我是一张图',
+            courses:[
+                'IOS 学院',
+                'HTM5 学院',
+                'JAVA 学院',
+                'VUE 学院'
+            ],
+            activeIndex:2,
+            weather:'今天好热',
+            persons:[
+                {name:'张三',age:15,sex:'男',phone:456123},
+                {name:'李四',age:14,sex:'女',phone:456123},
+                {name:'张思德',age:42,sex:'男',phone:456123},
+                {name:'玉林',age:25,sex:'男',phone:456123},
+
+            ],
+            newPerson:{name:'',age:0,sex:'男',phone:''}
+
+        },
+        methods:{//实例的所有函数实现
+            changeContent(){
+                this.weather="下雨了"
+            },
+            //1.创建一条person记录
+            createPerson(){
+                //条件提交
+                if(this.newPerson.name===''){
+                    alert('name can not null');
+                    return;
+                }
+                if(this.newPerson.age<0){
+                    alert('age can not <0');
+                    return;
+                }
+                if(this.newPerson.phone===''){
+                    alert('phone can not null');
+                    return;
+                }
+                //往数组中添加数据
+                this.persons.unshift(this.newPerson);
+                //添加完数据清空数据
+               this.newPerson={name:'',age:0,sex:'男',phone:''}
+            },
+            //2.删除一条记录
+            deletePerson(index){
+                this.persons.splice(index,1);
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

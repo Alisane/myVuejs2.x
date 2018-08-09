@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-Vue初体验</title>
+</head>
+<body>
+<div id="app">{{msg}}{{name}}</div>
+<script src="js/vue-2.4.0.js"></script>
+
+<script>
+    //vue的一个核心，数据驱动界面
+    //1.创建一个Vue实例
+    let vm=new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+            name:'alisane'
+        }
+    })
+</script>
+
+</body>
+</html>
