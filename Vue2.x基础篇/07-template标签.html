@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07-template标签</title>
+</head>
+<body>
+<div id="app">
+    <my-div></my-div>
+</div>
+<template id="my-div">
+    <div>
+        <p>我是template产生的div</p>
+        <span>我是template产生的div</span>
+    </div>
+</template>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+    Vue.component('my-div',{
+        template:'#my-div'
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+        }
+    })
+</script>
+</body>
+</html>
