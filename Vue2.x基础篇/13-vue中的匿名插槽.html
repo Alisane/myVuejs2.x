@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-vue中的匿名插槽-实现内容分发（类似占位符）</title>
+</head>
+<body>
+<div id="app">
+    <my-slot>
+        <p>替换的内容</p>
+    </my-slot>
+</div>
+<template id="my-slot">
+        <div id="panel">
+            <header>插槽的头部</header>
+            <!--预留一个插槽-->
+            <slot>可以替换任何标签，默认显示提示的内容</slot>
+            <footer>插槽的尾部</footer>
+        </div>
+</template>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+    Vue.component('my-slot',{
+        template:'#my-slot'
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+        }
+    })
+</script>
+</body>
+</html>

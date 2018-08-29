@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-组件之间的通信</title>
+</head>
+<body>
+<div id="app">
+    <my-div message="今天天气很好" imgsrc="images/img1.jpg"></my-div>
+</div>
+<template id="my-div">
+    <div>
+        <h1>{{message}}</h1>
+        <img :src="imgsrc" alt="picture" />
+    </div>
+</template>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+    Vue.component('my-div',{
+        template:'#my-div',
+        props:['message','imgsrc']
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+        }
+    })
+</script>
+
+</body>
+</html>

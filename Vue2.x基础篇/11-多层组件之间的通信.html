@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-多层组件之间的通信(父向子传递用props)</title>
+</head>
+<body>
+<div id="app">
+    <my-parent :imgsrc="imgsrc" :title="title"></my-parent>
+</div>
+
+<template id="my-img">
+        <img :src="imgsrc" alt="picture" />
+</template>
+
+<template id="my-title">
+        <h1>{{title}}</h1>
+</template>
+
+<template id="my-parent">
+    <div>
+        <child1 :imgsrc="imgsrc"></child1>
+        <child2 :title="title"></child2>
+    </div>
+</template>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+    let Child1=Vue.extend({
+        template:'#my-img',
+        props:['imgsrc']
+    })
+    let Child2=Vue.extend({
+        template:'#my-title',
+        props:['title']
+    });
+    Vue.component('my-parent',{
+        template:'#my-parent',
+        components:{
+            'child1':Child1,
+            'child2':Child2
+        },
+        props:['title','imgsrc']
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            title:'一张粉色的图片',
+            imgsrc:'images/img1.jpg'
+        }
+    })
+</script>
+
+</body>
+</html>

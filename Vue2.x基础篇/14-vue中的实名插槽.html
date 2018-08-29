@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14-vue中的实名插槽</title>
+</head>
+<body>
+<div id="app">
+    <my-computer>
+        <div slot="cpu">cpu</div>
+    </my-computer>
+</div>
+<template id="my-computer">
+    <div id="main">
+        <slot name="cpu">这里是cpu的</slot>
+        <slot name="memory">这里是内存条的</slot>
+        <slot name="dist">这里是硬盘的</slot>
+    </div>
+</template>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+    Vue.component('my-computer',{
+        template:'#my-computer'
+    });
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+        }
+    })
+</script>
+</body>
+</html>
