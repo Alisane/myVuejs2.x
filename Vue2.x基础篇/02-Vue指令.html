@@ -149,8 +149,7 @@
     v-text:注入的数据将静态数据覆盖
     v-html:注入标签
     v-bind:将属性动态的绑定到标签上面去  可以绑定属性  绑定类   简写 :
-    v-on: 用于触发事件  @
-
+    v-on: 用于触发事件  简写 @
     */
     new Vue({
         el:'#app',
@@ -164,7 +163,7 @@
             friends:['小明','小华','小兰'],
             dog:{name:'笨笨狗',age:5},
             name:'ali',
-//          phone:456123
+            //phone:456123
             stu:[
                 {name:'张三',age:23,sex:'男'},
                 {name:'李四',age:15,sex:'男'},
@@ -220,7 +219,7 @@
                 this.persons.splice(index,1);
             }
         }
-    })
+    });
 </script>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>15-vue-router的基本使用(vue-router对应板块的切换)</title>
-    <link rel="stylesheet" href="../Vue2.x基础篇/lib/bootstrap.min.js">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
             background-color: darkseagreen;
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
             <div class="page-header">
-                <p>title</p>
+                <h2>课程列表</h2>
             </div>
         </div>
     </div>
@@ -30,8 +30,6 @@
                 <router-link class="list-group-item" to="/python" >PYTHON</router-link>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-xs-6 ">
             <div class="panel">
                 <div class="panel-body">
@@ -41,38 +39,38 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
-<template id="h5">
-    <div>
-        <h2>HTML5</h2>
-        <p>h5</p>
-        <img src="../Vue2.x基础篇/images/img1.jpg" alt="picture" width="200"/>
-    </div>
-</template>
-<template id="java">
-    <div>
-        <h2>JAVA</h2>
-        <p>java</p>
-        <img src="images/img2.jpg" alt="picture" width="200"/>
-    </div>
-</template>
-<template id="python">
-    <div>
-        <h2>Python</h2>
-        <p>python</p>
-        <img src="images/img3.jpg" alt="picture" width="200"/>
-    </div>
-</template>
+    <template id="h5">
+        <div>
+            <h2>HTML5</h2>
+            <p>h5</p>
+            <img src="../Vue2.x基础篇/images/img1.jpg" alt="picture" width="200"/>
+        </div>
+    </template>
+    <template id="java">
+        <div>
+            <h2>JAVA</h2>
+            <p>java</p>
+            <img src="images/img2.jpg" alt="picture" width="200"/>
+        </div>
+    </template>
+    <template id="python">
+        <div>
+            <h2>Python</h2>
+            <p>python</p>
+            <img src="images/img3.jpg" alt="picture" width="200"/>
+        </div>
+    </template>
 
 <script src="js/vue-2.4.0.js"></script>
 <script src="lib/vue-router.js"></script>
-<!--<script src="../Vue2.x基础篇/lib/vue-router.esm.js"></script>-->
-<!--<script src="../Vue2.x基础篇/lib/vue-router.common.js"></script>-->
+
 <script>
-  //1.创建组件
-  const Html5 = Vue.extend({
+//  1.创建组件
+//  import VueRouter from "../Vue2.x基础篇/lib/vue-router.esm";
+
+    const Html5 = Vue.extend({
         template:'#h5'
     });
     const Java = Vue.extend({
@@ -86,6 +84,7 @@
         {path:'/h5',component:Html5},
         {path:'/java',component:Java},
         {path:'/python',component:Python},
+        {path:'/',redirect:'/h5'}
     ];
     //3.创建路由实例
     const router = new VueRouter({

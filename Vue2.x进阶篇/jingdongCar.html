@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jingdongCar</title>
+    <style>
+        body,p,input,ul{
+            margin: 0;
+            padding:0;
+        }
+        .item {
+            max-width:750px;
+            height:120px;
+            margin:5px;
+            display: flex;
+            background-color: #4cae4c;
+        }
+        .item>input {
+            /*width: 30px;*/
+        }
+        .item>div {
+            display: flex;
+            flex: auto;
+            background-color: darkseagreen;
+        }
+        .item>div>img {
+            width: 100px;
+            height:100px;
+            margin-top: 10px;
+            vertical-align: middle;
+        }
+        .item>div>div {
+            margin: 10px 10px;
+        }
+
+        .shoppingCar {
+            display: flex;
+            list-style:none;
+        }
+        .number {
+            width: 55px;
+            height:28px;
+            text-align: center;
+            border: 1px solid dimgray;
+        }
+        .decrease,.increase{
+            display: inline-block;
+            width: 28px;
+            height:28px;
+            text-align: center;
+            line-height: 26px;
+            border: 1px solid dimgray;
+        }
+        .increase {
+            border-left:none;
+        }
+        .decrease {
+            border-right:none;
+        }
+        .item .totalMoney {
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <section class="item" v-for="(shop,index) in shopListArr">
+            <input type="checkbox" :checked="shop.checked" @click="singleShopSelected(shop)">
+            <div>
+                <img :src="shop.shopImage" :alt="shop.shopName">
+                <div>
+                    <p v-text="shop.shopName">tilie</p>
+                    <p>
+                        <span class="singleMoney" >{{shop.shopPrice | moneyFormat(shop.shopPrice)}}</span>
+                        <span class="totalMoney">{{shop.shopPrice*shop.shopNumber | moneyFormat(shop.shopPrice*shop.shopNumber)}}</span>
+                    </p>
+                    <ul class="shoppingCar">
+                        <li><span class="decrease" @click="singlePrice(shop,false)">-</span></li>
+                        <li><input type="text" class="number" value="shop.shopNumber" v-model="shop.shopNumber"></li>
+                        <li><span class="increase" @click="singlePrice(shop,true)">+</span></li>
+                    </ul>
+                    <span @click="deleteShop(shop)">delete</span>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <label >全选</label>
+            <input type="checkbox" :checked="isSelectedAll" @click="selectedAll(isSelectedAll)">
+            <label >合计</label>
+            <span>{{totalPrice | moneyFormat(totalPrice)}}</span>
+        </footer>
+    </div>
+</div>
+<script src="lib/vue-2.4.0.js"></script>
+<script src="lib/vue-resource.js"></script>
+<script src="js/shoppingCar.js"></script>
+</body>
+</html>

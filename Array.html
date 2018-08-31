@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="jsContainer">
+
+    可能包含一些链接，比如https://www.baidu.com，或者 www.baidu.com?from=onlineExam，如果出现链接文本，请给该链接文本加上链接标签，
+
+</div>
+<script>
+    /* //1. 在英文中,我们会把一些长的名字或者短语进行缩写。例如"looks good to me"缩写为"lgtm",短语中的每个单词的首字母组成缩写。
+    //现在给出一个字符串s,字符串s中包括一个或者多个单词,单词之间以空格分割,请输出这个字符串的缩写。
+    //split()把一个字符串分割成字符串数组; trim()去掉字符串首尾空格
+    let str2 = "hellow  world!"            //注意hellow与world之前有两个空格
+    console.log(str2.trim().split(" "));   //(3) ["hellow", "", "world!"]
+    console.log(str2.trim().split(/\s+/)); //(2) ["hellow", "world!"]
+    function sub(str){
+       if(str.length<0) return;
+       let arr=str.trim().split(/\s+/);
+       var newStr='';
+       arr.forEach(function(item,index){
+           newStr+=item.slice(0,1);
+       });
+       return newStr;
+    }
+     console.log(sub("  zx zx as qw"));//zzaq
+     */
+
+
+   /* //2.给定5个正整数, 它们的最小的众倍数是指的能够被其中至少三个数整除的最小正整数。
+    //给定5个不同的正整数, 请计算输出它们的最小众倍数。2 4 8 12 24````
+    //解思：2%2，2%4，2%8，2%12，2%24，4%2，4%4......
+    function compute(arr) {
+        var b=[];
+        for(var i=0;i<arr.length;i++) {
+            var count=0;//给每个数计数的时候，应该从0 开始
+            for (var j = 0; j < arr.length; j++) {
+                if (arr[i] % arr[j] == 0) {
+                    count++;
+                }
+                if (count >= 3){
+                    b.push(arr[i]);//将可以整除其他数的公倍数放入数组b中
+                    break;//当至少有三个的时候，跳出内循环
+                }
+            }
+        }
+        //在数组b中找到最小的那个正整数
+        if(b.length===0) return  "Have no like this num"
+        let min=b[0];
+        for(var i=1;i<b.length;i++){
+            if(b[i]<min){
+                min = b[i];
+            }
+            return min;
+        }
+        return min;//返回最小众倍数
+    }
+    console.log(compute([2, 7, 5, 1, 3]));//Have no like this num
+    console.log(compute([2, 4, 24, 8, 12]));//8
+    */
+
+    /*3.页面中存在id=jsContainer的DOM元素。
+    该DOM元素内会给出一段随机文本，可能包含一些链接，比如https://www.baidu.com，或者 www.baidu.com?from=onlineExam，
+    如果出现链接文本，请给该链接文本加上链接标签，用户点击后能直接在新窗口中打开该链接。
+    请完成 link 函数，完成该功能
+    1、container只有纯文本内容，不包含其他dom元素
+    2、识别所有以http://、https://或者www.开始的链接
+    3、所有www.开头的链接，默认使用 http 协议
+    4、所有链接在新窗口打开*/
+
+   /* function link(){
+        //1.获取到文本内容
+        var content=document.getElementById('jsContainer');
+        var text=content.textContent;
+        console.log(text);
+        //2.定义正则表达式
+        var reg=new RegExp("(http://||https://)?www.[a-zA-Z0-9+/!@#%^&_?=|:,.;]+[-A-Za-z0-9+&@#/%=~_|]","g");
+//                            "(http://||https://)?www.[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]"
+        //3.开始匹配
+        var newText=text.replace(reg,function (result) {
+            if((new RegExp("^www.")).test(result)){
+                result="http://"+result;
+            }
+            return '<a target="_blank" href="+result+">'+result+'</a>'
+        })
+        content.innerHTML=newText;
+    }
+   link();*/
+
+
+
+   /* console.log(0.1 + 0.2);//0.30000000000000004
+    console.log(0.1 + 0.2 == 0.3);//false
+    console.log(parseInt(0.01) * 10 + parseInt(0.02 * 10) == parseInt(0.3));//true
+    var a='100',b=100; var c=a+b,d=a-c;
+    console.log(c);//100100 typeof(c)//string
+    console.log(d);//0 typeof(c)//number
+    console.log(Boolean(NaN));
+    var s="0";
+    console.log(Boolean(s));//true
+
+    几乎每一个值都有toString()方法，除了Null只有一个值null   Undefined只有一个值undefined
+    console.log(typeof undefined);//undefined
+    console.log(typeof null);//object
+    console.log(toString(null) );//[object Undefined]
+    console.log(String(null) );//null
+
+    var a="123",b="123a",c=11.1;
+    console.log(Number(b));//NaN
+    console.log(Number(null));//0
+    console.log(Number(" "));//0
+    console.log(parseInt(b));//123
+    console.log(parseFloat(b));//123
+    console.log(parseInt(c));//11
+    console.log(parseFloat(c));//11.1*/
+
+  /* for(var i=0;i<=100;i++){
+       console.log(i);
+   }
+
+    var sum=0;
+    for(var i=0;i<=100;i++){
+        sum=sum+i;
+    }
+    console.log(sum);//5050
+    console.log(sum/100);//50.5
+
+        var ou=0,ji=0;
+        for(var i=0;i<=100;i++){
+            if(i%2==0){
+                ou=ou+i;
+            }
+            else{
+                ji=ji+i;
+            }
+        }
+        console.log(ou);//2550
+        console.log(ji);//2500
+
+    var old=10000;
+    for(var i=1;i<=5;i++){
+        old+=(old*0.003);
+    }
+    console.log(old);
+
+    //打印9*9乘法表
+    for(var i=1;i<=9;i++){
+        for(var j=1;j<=i;j++){
+            document.write(i +"*"+ j+"="+  i * j);
+            document.write("\n");
+            console.log(i * j);
+        }
+        document.write("<br />");
+    }
+    //打印正方形
+    for(var i=1;i<=9;i++){
+        for(var j=1;j<=9;j++){
+            document.write("♥");
+            document.write("\n");
+        }
+        document.write("<br />");
+    }
+
+    //整除3
+    var sum=0;
+    for(var i=1;i<=100;i++){
+        if(i%3!=0){
+            sum+=i;
+            if(sum>=2000){
+                document.write(i+"\n");
+            }
+        }
+    }
+
+    do{
+        var msg=prompt("do you love me(y/n)");
+        if(msg==="y"){
+            document.write("me too");
+            break;
+        }
+
+    } while (true);
+    do{
+        var msg=prompt("do you love me(y/n)");
+        if(msg==="y"){
+            document.write("me too");
+        }
+
+    } while (msg!=="y");*/
+
+
+    //1.求一组数中的最大最小值
+
+    /*function getMaxAndMin(arr) {
+        arr=arr||[];//容错处理
+        if(arr.length==0) return "It's an empty array";
+        var max=arr[0],min=arr[0];
+        for(var i=1;i<arr.length;i++){
+//            if(max<arr[i]){
+//                max=arr[i];
+//            }
+             max=max<arr[i]?arr[i]:max;
+            if(min>arr[i]){
+                min=arr[i];
+            }
+        }
+        return max+"--"+min;
+    }
+
+    console.log(getMaxAndMin([0,-6, -3, -5, -8]));*/
+
+    //2.翻转数组，返回一个新数组
+
+    /*function reverseArr(arr) {
+        var newArr=[];
+        for(var i=arr.length-1;i>=0;i--){
+            newArr.push(arr[i]);
+        }
+        return newArr;
+    }
+    console.log(reverseArr([1, 2, 3, 4, 5, 6]));*/
+
+    //3.翻转数组，在原来的基础上
+
+    /*function reverseArr(arr) {
+        if(arr.length==0) return "It's an empty array";
+        var len=arr.length/2,length=arr.length-1;
+        for(var i=0;i<len;i++,length--){
+            var temp=arr[i];
+            arr[i]=arr[length];
+            arr[length]=temp;
+        }
+        return arr;
+    }
+    console.log(reverseArr([1, 2, 3, 4, 5, 6,9]));*/
+
+
+    /**
+     *对数组排序，由小到大
+     * @param arr {Array}
+     * @returns {Array}
+     */
+    /*function sortArr(arr) {
+        if(arr.length==0) return "It's an empty array";
+        var temp=0;
+        for(var i=0;i<arr.length;i++){
+            for(var j=1;j<=arr.length;j++)
+            if(arr[i]>arr[j]){
+                temp=arr[i];
+                arr[i]=arr[i+1];
+                arr[i+1]=temp;
+            }
+        }
+        return arr;
+    }
+    console.log(sortArr([5, 2, 1, 4, 7, 6,9]));//Array(7) [ 9, 6, 5, 4, 3, 2, 1 ]*/
+    /**
+     *
+     * @param arr
+     * @returns {*}
+     */
+    function sortArr(arr) {
+        if(arr.length==0) return "It's an empty array";
+        var temp=0;
+        for(var i=0;i<arr.length;i++){
+            for(var j=1;j<=arr.length;j++)
+                if(arr[i]>arr[j]){
+                    temp=arr[i];
+                    arr[i]=arr[i+1];
+                    arr[i+1]=temp;
+                }
+        }
+        return arr;
+    }
+    console.log(sortArr([5, 2, 1, 4, 7, 6,9]));//Array(7) [ 9, 6, 5, 4, 3, 2, 1 ]
+
+
+
+
+</script>
+</body>
+</html>

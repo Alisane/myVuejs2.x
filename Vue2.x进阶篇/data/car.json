@@ -1,0 +1,28 @@
+{
+ "allShops":{
+   "totalName":0,
+   "shopList":[
+     {
+       "shopId":"1001",
+       "shopName":"360智能相机1",
+       "shopPrice":101.00,
+       "shopNumber":1,
+       "shopImage":"images/img1.jpg"
+     },
+     {
+       "shopId":"1002",
+       "shopName":"360智能相机2",
+       "shopPrice":202.00,
+       "shopNumber":1,
+       "shopImage":"images/img2.jpg"
+     },
+     {
+       "shopId":"1003",
+       "shopName":"360智能相机3",
+       "shopPrice":303.00,
+       "shopNumber":1,
+       "shopImage":"images/img3.jpg"
+     }
+   ]
+ }
+}
